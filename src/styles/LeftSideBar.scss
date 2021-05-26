@@ -1,0 +1,8 @@
+@import "./Theme";
+
+.left_sidebar{
+    display:flex;
+    flex-direction: column;
+    background-color:$background_surface;
+    color:white;
+}

@@ -1,0 +1,37 @@
+@import "./Theme";
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+.header {
+  display: flex;
+  background-color: $background_surface2;
+  color: white;
+}
+
+.footer {
+  display: flex;
+  background-color: $background_surface2;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    background-color: gold;
+    margin-right:10px;
+  }
+}
+
+.whole_dialog{
+  div[role="dialog"]{
+    background-color: $background_surface2;
+    color:white;
+    p{
+      color:lightgray;
+    }
+  }
+}
