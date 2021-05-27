@@ -39,7 +39,7 @@ function ContentFooter(){
         <Typography variant="h6" gutterBottom style={{marginTop:"10px"}}>Categories to sort by</Typography>
         <Categories/>
         <div className="prices">
-        <TextField label="Gold" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gold"}}} fullWidth/>
+        <TextField label="Gold"   inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gold"}}} fullWidth/>
         <TextField label="Silver" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"silver"}}} fullWidth/>
         </div>
         </DialogContent>
@@ -71,7 +71,8 @@ function Categories(){
     "Brneni",
     "Doplnky",
     "Spotrebni zbozi",
-    "Placene zbozi"
+    "Placene zbozi",
+    "Default"
     ];
     const HeroMenuOptions=[
         "Bojovnik",
@@ -79,12 +80,14 @@ function Categories(){
         "Lukostrelec",
         "Kouzelnik",
         "Knez",
-        "Zarikavac"
+        "Zarikavac",
+        "Default"
     ];
     const AccessoriesMenuOptions=[
         "Prsten",
         "Nahrdelnik",
         "Nausnice",
+        "Default"
     ];
     const GoodsMenuOptions=[
         "Tasky",
@@ -93,15 +96,17 @@ function Categories(){
         "Specialne Predmet",
         "Vylepseni",
         "Dalsi",
+        "Default"
     ];
     const PaidOptions=[
-    "Placene"
+    "Placene",
+    "Default"
     ];
 
     return(
         <div className="categoryinfo">
         <div className="categorybtn">
-        <Button variant="text" color="primary" id="category" onClick={(e)=>{setCategoryAnchor(e.currentTarget)}}>{category}</Button>
+        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setCategoryAnchor(e.currentTarget)}}>{category}</Button>
         </div>
         <Menu
         anchorEl={categoryAnchor}
@@ -117,7 +122,7 @@ function Categories(){
         </Menu>
         
         <div className="categorybtn">
-        <Button variant="text" color="primary" id="category" onClick={(e)=>{setHeroClassAnchor(e.currentTarget)}}>{heroClass}</Button>
+        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setHeroClassAnchor(e.currentTarget)}}>{heroClass}</Button>
         </div>
         <Menu
         anchorEl={heroClassAnchor}
@@ -133,7 +138,7 @@ function Categories(){
         </Menu>
 
         <div className="categorybtn">
-        <Button variant="text" color="primary" id="category" onClick={(e)=>{setAccessoriesAnchor(e.currentTarget)}}>{accessories}</Button>
+        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setAccessoriesAnchor(e.currentTarget)}}>{accessories}</Button>
         </div>
         <Menu
         anchorEl={accessoriesAnchor}
@@ -149,7 +154,7 @@ function Categories(){
         </Menu>
 
         <div className="categorybtn">
-        <Button variant="text" color="primary" id="category" onClick={(e)=>{setGoodAnchor(e.currentTarget)}}>{goods}</Button>
+        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setGoodAnchor(e.currentTarget)}}>{goods}</Button>
         </div>
         <Menu
         anchorEl={goodsAnchor}
@@ -165,7 +170,7 @@ function Categories(){
         </Menu>
 
         <div className="categorybtn">
-        <Button variant="text" color="primary" id="category" onClick={(e)=>{setPaidAnchor(e.currentTarget)}}>{paid}</Button>
+        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setPaidAnchor(e.currentTarget)}}>{paid}</Button>
         </div>
         <Menu
         anchorEl={paidAnchor}

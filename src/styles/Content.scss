@@ -22,27 +22,36 @@
 
   button {
     background-color: gold;
-    margin-right:10px;
+    margin-right: 10px;
   }
 }
 
-.whole_dialog{
-  div[role="dialog"]{
+.whole_dialog {
+  div[role="dialog"] {
     background-color: $background_surface2;
-    color:white;
+    color: white;
     max-width: 1000px;
-    p{
-      color:lightgray;
+
+    p {
+      color: lightgray;
     }
   }
-  .categoryinfo{
-    display:flex;
+
+  .categoryinfo {
+    display: flex;
   }
-  .categorybtn{
-    padding:5px;
+
+  .categorybtn {
+    padding: 5px;
   }
-  .prices{
-    display:flex;
+
+  .prices {
+    display: flex;
     justify-content: center;
   }
+}
+
+.MuiMenu-list {
+  background-color: $background_surface2;
+  color: white;
 }
