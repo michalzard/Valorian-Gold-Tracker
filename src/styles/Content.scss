@@ -30,6 +30,7 @@
   div[role="dialog"]{
     background-color: $background_surface2;
     color:white;
+    max-width: 1000px;
     p{
       color:lightgray;
     }
@@ -38,6 +39,10 @@
     display:flex;
   }
   .categorybtn{
-    button{padding:10px;}
+    padding:5px;
+  }
+  .prices{
+    display:flex;
+    justify-content: center;
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemList from "./ItemList";
 import "../styles/Content.scss";
-import {Button,TextField,Menu,MenuItem} from "@material-ui/core";
+import {Button,TextField,Menu,MenuItem,Typography} from "@material-ui/core";
 import {Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions} from "@material-ui/core";
 import { useState } from 'react';
 
@@ -31,23 +31,17 @@ function ContentFooter(){
     return(
         <div className="footer">
         <h4>Footer</h4>
-        <Dialog
-        className="whole_dialog" id="whole_dialog"
-        open={isOpen}
-        onClose={()=>{setOpen(false);}} //click away listener
-        keepMounted
-        >
+        <Dialog className="whole_dialog" id="whole_dialog" open={isOpen} onClose={()=>{setOpen(false);}} keepMounted>
         <DialogTitle>Create Item</DialogTitle>
         <DialogContent>    
-        <DialogContentText>Create item with current prices to be stored</DialogContentText>  
-        <TextField label="Name" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gray"}}} fullWidth
-        />
+        <DialogContentText>Create item with current prices to be stored.<br/>Prices can be only entered as 3 digit numbers.</DialogContentText>  
+        <TextField label="Name" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gray"}}} fullWidth/>
+        <Typography variant="h6" gutterBottom style={{marginTop:"10px"}}>Categories to sort by</Typography>
         <Categories/>
-        <TextField label="Gold" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gold"}}}
-        />
-        <TextField label="Silver" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"silver"}}}
-        />
-        
+        <div className="prices">
+        <TextField label="Gold" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gold"}}} fullWidth/>
+        <TextField label="Silver" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"silver"}}} fullWidth/>
+        </div>
         </DialogContent>
         <DialogActions>
         <Button color="primary" variant="outlined">Add Item</Button>
@@ -66,11 +60,11 @@ function Categories(){
     const [goodsAnchor,setGoodAnchor]=useState(null); //anchor where menu attaches for toggle
     const [paidAnchor,setPaidAnchor]=useState(null); //anchor where menu attaches for toggle
 
-    const [category,setCategory]=useState("Category");
-    const [heroClass,setHeroClass]=useState("Class");
-    const [accessories,setAccessories]=useState("Accessories");
-    const [goods,setGoods]=useState("Goods");
-    const [paid,setPaid]=useState("Category");
+    const [category,setCategory]=useState("Default");
+    const [heroClass,setHeroClass]=useState("Default");
+    const [accessories,setAccessories]=useState("Default");
+    const [goods,setGoods]=useState("Default");
+    const [paid,setPaid]=useState("Default");
 
     const CategoryMenuOptions=[
     "Zbrane",
@@ -166,6 +160,22 @@ function Categories(){
         {
             GoodsMenuOptions.map((goods,i)=>{
             return <MenuItem key={i} onClick={()=>{setGoods(goods); setGoodAnchor(null); }}>{goods}</MenuItem>
+            })
+        }
+        </Menu>
+
+        <div className="categorybtn">
+        <Button variant="text" color="primary" id="category" onClick={(e)=>{setPaidAnchor(e.currentTarget)}}>{paid}</Button>
+        </div>
+        <Menu
+        anchorEl={paidAnchor}
+        keepMounted
+        open={Boolean(paidAnchor)}
+        onClose={()=>{setPaidAnchor(null)}}
+        >
+        {
+            PaidOptions.map((paid,i)=>{
+            return <MenuItem key={i} onClick={()=>{setPaid(paid); setPaidAnchor(null); }}>{paid}</MenuItem>
             })
         }
         </Menu>
