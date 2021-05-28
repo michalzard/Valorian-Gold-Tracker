@@ -12,22 +12,17 @@ function ItemList() {
 
 export default ItemList;
 
-function Item(){
+function Item({photoURL,name,price,}){
     return(
        <div className="item">
         <div className="photo">
-        <img src="" alt=""></img>
+        <img src={photoURL ? photoURL : ""} alt=""></img>
         <div className="info">
-        <span className="name">Name</span>
+        <span className="name">{name ? name : "Name"}</span>
         <div className="prices">
-        <span>Current price : 0 gold 0 silver </span>
-        <span>Average to sell price : 0 gold 0 silver</span>
-        <span>Average to buy price : 0 gold 0 silver</span>
-        
-        {/* <div className="actions">
-        action buttons
-        </div>
-         */}
+        <span>Current price :{price ? price : "0 gold 0 silver"}</span>
+        {/* <span>Average to buy price : 0 gold 0 silver</span> */}
+    
         </div>
         </div>
         </div>

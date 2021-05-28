@@ -3,7 +3,7 @@ import ItemList from "./ItemList";
 import "../styles/Content.scss";
 import {Button,TextField,Menu,MenuItem,Typography} from "@material-ui/core";
 import {Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions} from "@material-ui/core";
-import { useState } from 'react';
+import { useState} from 'react';
 
 function Content() {
     return (
@@ -28,6 +28,10 @@ function ContentHeader(){
 
 function ContentFooter(){
     const [isOpen,setOpen]=useState(false);
+
+    const [goldValue,setGoldValue]=useState("");
+    const [silverValue,setSilverValue]=useState("");
+
     return(
         <div className="footer">
         <h4>Footer</h4>
@@ -35,12 +39,16 @@ function ContentFooter(){
         <DialogTitle>Create Item</DialogTitle>
         <DialogContent>    
         <DialogContentText>Create item with current prices to be stored.<br/>Prices can be only entered as 3 digit numbers.</DialogContentText>  
-        <TextField label="Name" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gray"}}} fullWidth/>
+        <TextField label="Name" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gray"}}} placeholder="Vytazek preziti" fullWidth/>
         <Typography variant="h6" gutterBottom style={{marginTop:"10px"}}>Categories to sort by</Typography>
         <Categories/>
         <div className="prices">
-        <TextField label="Gold"   inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gold"}}} fullWidth/>
-        <TextField label="Silver" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"silver"}}} fullWidth/>
+        <TextField label="Gold" inputProps={{style:{color:"white"},maxLength:6}} InputLabelProps={{style:{color:"gold"}}} fullWidth
+        onChange={(e)=>{setGoldValue(e.currentTarget.value);}} value={goldValue} placeholder="999999"
+        />
+        <TextField label="Silver" inputProps={{style:{color:"white"},maxLength:3}} InputLabelProps={{style:{color:"silver"}}} fullWidth
+        onChange={(e)=>{setSilverValue(e.currentTarget.value);}} value={silverValue} placeholder="999"
+        />
         </div>
         </DialogContent>
         <DialogActions>
