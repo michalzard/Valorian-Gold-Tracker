@@ -6,11 +6,16 @@ import {Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions} from "
 import { useState} from 'react';
 
 function Content() {
+    const [items,setItems]=useState([]);
+    const addItem=(item)=>{
+        setItems(prev=>([...prev,item]));
+    }
+
     return (
         <div className="content">
         <ContentHeader/>
-        <ItemList/>
-        <ContentFooter/>
+        <ItemList list={items}/>
+        <ContentFooter addItem={addItem}/>
         </div>
     )
 }
@@ -21,17 +26,18 @@ export default Content;
 function ContentHeader(){
     return(
         <div className="header">
-        <h4>Header</h4>
+        <h4 style={{marginLeft:"20px"}}>4Story Price Tracker</h4>
         </div>
     )
 }
 
-function ContentFooter(){
+function ContentFooter({addItem}){
     const [isOpen,setOpen]=useState(false);
 
+    const [itemName,setItemName]=useState("");
     const [goldValue,setGoldValue]=useState("");
     const [silverValue,setSilverValue]=useState("");
-
+    const [categories,setCategories]=useState(null);
     return(
         <div className="footer">
         <h4>Footer</h4>
@@ -39,9 +45,11 @@ function ContentFooter(){
         <DialogTitle>Create Item</DialogTitle>
         <DialogContent>    
         <DialogContentText>Create item with current prices to be stored.<br/>Prices can be only entered as 3 digit numbers.</DialogContentText>  
-        <TextField label="Name" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gray"}}} placeholder="Vytazek preziti" fullWidth/>
+        <TextField label="Name" inputProps={{style:{color:"white"}}} InputLabelProps={{style:{color:"gray"}}} placeholder="Vytazek preziti" fullWidth
+        onChange={(e)=>{setItemName(e.currentTarget.value);}} value={itemName}
+        />
         <Typography variant="h6" gutterBottom style={{marginTop:"10px"}}>Categories to sort by</Typography>
-        <Categories/>
+        <Categories setCategories={setCategories}/>
         <div className="prices">
         <TextField label="Gold" inputProps={{style:{color:"white"},maxLength:6}} InputLabelProps={{style:{color:"gold"}}} fullWidth
         onChange={(e)=>{setGoldValue(e.currentTarget.value);}} value={goldValue} placeholder="999999"
@@ -52,16 +60,16 @@ function ContentFooter(){
         </div>
         </DialogContent>
         <DialogActions>
-        <Button color="primary" variant="outlined">Add Item</Button>
-        <Button color="secondary" variant="outlined" onClick={()=>{setOpen(false)}}>Close</Button>
+        <Button color="primary" variant="outlined" onClick={()=>{addItem({itemName,price:{gold:goldValue,silver:silverValue}});setItemName("");setGoldValue("");setSilverValue("");setOpen(false);}}>Add Item</Button>
+        <Button color="secondary" variant="outlined" onClick={()=>{setOpen(false);}}>Close</Button>
         </DialogActions>
         </Dialog>
-        <Button variant="contained" color="secondary" onClick={()=>{setOpen(true)}}>Add Item</Button>
+        <Button variant="contained" color="secondary" onClick={()=>{setOpen(true);}}>Add Item</Button>
         </div>
     )
 }
 
-function Categories(){
+function Categories({setCategories}){
     const [categoryAnchor,setCategoryAnchor]=useState(null); //anchor where menu attaches for toggle
     const [heroClassAnchor,setHeroClassAnchor]=useState(null); //anchor where menu attaches for toggle
     const [accessoriesAnchor,setAccessoriesAnchor]=useState(null); //anchor where menu attaches for toggle
@@ -120,7 +128,7 @@ function Categories(){
         anchorEl={categoryAnchor}
         keepMounted
         open={Boolean(categoryAnchor)}
-        onClose={()=>{setCategoryAnchor(null)}}
+        onClose={()=>{setCategoryAnchor(null);}}
         >
         {
             CategoryMenuOptions.map((category,i)=>{
@@ -130,13 +138,13 @@ function Categories(){
         </Menu>
         
         <div className="categorybtn">
-        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setHeroClassAnchor(e.currentTarget)}}>{heroClass}</Button>
+        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setHeroClassAnchor(e.currentTarget);}}>{heroClass}</Button>
         </div>
         <Menu
         anchorEl={heroClassAnchor}
         keepMounted
         open={Boolean(heroClassAnchor)}
-        onClose={()=>{setHeroClassAnchor(null)}}
+        onClose={()=>{setHeroClassAnchor(null);}}
         >
         {
             HeroMenuOptions.map((hero,i)=>{
@@ -146,13 +154,13 @@ function Categories(){
         </Menu>
 
         <div className="categorybtn">
-        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setAccessoriesAnchor(e.currentTarget)}}>{accessories}</Button>
+        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setAccessoriesAnchor(e.currentTarget);}}>{accessories}</Button>
         </div>
         <Menu
         anchorEl={accessoriesAnchor}
         keepMounted
         open={Boolean(accessoriesAnchor)}
-        onClose={()=>{setAccessoriesAnchor(null)}}
+        onClose={()=>{setAccessoriesAnchor(null);}}
         >
         {
             AccessoriesMenuOptions.map((acc,i)=>{
@@ -162,13 +170,13 @@ function Categories(){
         </Menu>
 
         <div className="categorybtn">
-        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setGoodAnchor(e.currentTarget)}}>{goods}</Button>
+        <Button variant="text" color="secondary" id="category" onClick={(e)=>{setGoodAnchor(e.currentTarget);}}>{goods}</Button>
         </div>
         <Menu
         anchorEl={goodsAnchor}
         keepMounted
         open={Boolean(goodsAnchor)}
-        onClose={()=>{setAccessoriesAnchor(null)}}
+        onClose={()=>{setAccessoriesAnchor(null);}}
         >
         {
             GoodsMenuOptions.map((goods,i)=>{
@@ -184,7 +192,7 @@ function Categories(){
         anchorEl={paidAnchor}
         keepMounted
         open={Boolean(paidAnchor)}
-        onClose={()=>{setPaidAnchor(null)}}
+        onClose={()=>{setPaidAnchor(null);}}
         >
         {
             PaidOptions.map((paid,i)=>{

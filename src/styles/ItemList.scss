@@ -1,5 +1,5 @@
 @import "./Theme";
-
+$img:25px;
 .item_list {
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@
   padding: 20px;
   background-color: $background_surface;
   border-radius: 10px;
-
+  margin-top:5px;
   .photo {
     display: flex;
 
@@ -36,6 +36,13 @@
         margin-left: 10px;
         span{
             margin-right: 10px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            span{
+            margin-left: 10px;
+          }
+          img{width:$img;height:$img;}
         }
       }
     }
